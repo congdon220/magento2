@@ -1,0 +1,61 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see \Magento\Customer\Block\Form\Login
+ * @var $block \Magento\Customer\Block\Form\Login
+ */
+?>
+<?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->get('Magento\Customer\Model\Session');?>
+<section class="POP_UP_Wrapper" <?php if($customerSession->isLoggedIn() || $_SERVER['REQUEST_URI']== '/customer/account/login/' || $_SERVER['REQUEST_URI'] == '/customer/account/create/' || $_SERVER['REQUEST_URI'] == '/customer/account/forgotpassword/') {
+   echo "style='display:none'";}  ?> >
+      <div class="popup_container">
+         <article class="half">
+            <img src="<?php /* @escapeNotVerified */ echo $block->getBaseUrl() ?>pub/media/wysiwyg/popup_logo.png">
+            <div class="tabs">
+              <span class="tab signup active"><a href="#signup">Sign up</a></span>            
+              <span class="tab signin"><a href="#signin">Sign in</a></span>
+               
+            </div>
+            <div class="content">
+               <div class="signin-cont cont">
+                  <form action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>" method="post" enctype="multipart/form-data" data-mage-init='{"validation":{}}'>
+                  <?php echo $block->getBlockHtml('formkey'); ?>
+                     <input name="login[username]" value="<?php echo $block->escapeHtml($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text inpt" placeholder="Email" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" data-validate="{required:true, 'validate-email':true}">
+                     <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text inpt" id="pass" placeholder="password" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" data-validate="{required:true}">
+                     <div class="submit-wrap">
+                        <input type="submit" class="submit" name="send" id="send2" value="Sign in">
+                        <a class="pslogin-button-link pslogin-button-click" id="account_btn_facebook_login" rel="nofollow" href="javascript:void(0);" data-href="https://techaffair.com/pslogin/account/douse/type/facebook/refresh/1486413045/" data-width="650" data-height="350"><div class="icon-facebook-white"></div> Login with Facebook</a>
+                     </div>
+                  </form>
+               </div>
+               <div class="signup-cont cont">
+                  <form action="<?php /* @escapeNotVerified */ echo $block->getBaseUrl() ?>customer/account/createpost/" method="post" enctype="multipart/form-data" autocomplete="off" >
+                    <input type="text" name="firstname" id="_firstname"  placeholder="Firstname" title="firstname" class="inpt" required="required">
+                    <input type="text" name="lastname" id="_lastname" placeholder="Lastname" title="lastname" class="inpt" required="required">
+                    <input type="email" name="email" id="_email_address" class="inpt" placeholder="Email" required="required">
+                    <input type="password" name="password" title="Password must contain at least 8 characters, including UpperCase, LowerCase and Number" id="_password" class="inpt" placeholder="Password" required="required" min-length="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_confirmation.pattern = this.value;" autocomplete="off">
+                    <input type="password" name="password_confirmation" title="Please enter the same Password as above" id="_password_confirmation" class="inpt" required="required" placeholder="re-password" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');" autocomplete="off">
+                    <div class="submit-wrap">
+                        <input type="submit" class="submit" id="sign_up" value="Sign up">
+                        <a class="pslogin-button-link pslogin-button-click" id="account_btn_facebook_login" rel="nofollow" href="javascript:void(0);" data-href="https://techaffair.com/pslogin/account/douse/type/facebook/refresh/1486413045/" data-width="650" data-height="350"><div class="icon-facebook-white"></div> Login with Facebook</a>
+                        <a href="#" class="more">Terms and conditions</a>
+                    </div>
+                  </form>
+               </div>
+            </div>
+         </article>
+         <div class="half bg"></div>
+      </div>
+      </section>

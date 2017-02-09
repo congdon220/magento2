@@ -1,0 +1,27 @@
+@media only screen and (min-width: 769px){
+.header-wrapper.header-pin .middle-block{
+	position: fixed;
+   z-index: 9999;
+   background-color: #000;
+   left: 0;
+   right: 0;
+   top: 0;
+}
+div#sticky-header {
+    display: none !important;
+}
+.header-wrapper.header-pin .block-static-block,
+.header-wrapper.header-pin + .breadcrumbs-wrapper {
+    margin-top: 54px;
+}
+}
+@media only screen and (min-width: 1007px){
+.logo > img {
+        width: 70%;
+    margin: 12px -44px 0px 45px;
+}
+.page-header .middle-block-inner .right-block {
+    float: right;
+    margin-right: 35px;
+}
+}

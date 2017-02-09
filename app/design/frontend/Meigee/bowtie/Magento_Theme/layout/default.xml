@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+ <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body meigee-config-add-attribute="class|bowtie_general/bowtie_layout/site_layout:::class|bowtie_general/bowtie_header/sticky_header_tablet" >
+        <referenceContainer name="header.panel">
+			<referenceBlock class="Meigee\Bowtie\Block\Frontend\Currency" name="currency" after="store_language" meigee-config-template="bowtie_general/bowtie_currency_switcher/currency_switcher_status" />
+        </referenceContainer>
+         <referenceContainer name="header.container">
+			<container name="header.top.wrapper" htmlClass="top-block" htmlTag="div" before="-">
+				<container name="header.top.inner" htmlClass="top-block-inner clearfix" htmlTag="div" before="-">
+					<container name="header.top.left" htmlClass="left-block" htmlTag="div" before="-">
+						<block class="Magento\Theme\Block\Html\Header" name="header.welcome" template="Magento_Theme::html/welcome.phtml" after="currency" />
+					</container>
+					<container name="header.top.right" htmlClass="right-block" htmlTag="div" after="-">
+						<block class="Magento\Cms\Block\Block" name="bowtie.header.social.links" before="-">
+							<arguments>
+								<argument name="block_id" xsi:type="string">bowtie_social_links</argument>
+							</arguments>
+						</block>
+						<block class="Magento\Framework\View\Element\Html\Links" name="header.links">
+							<arguments>
+								<argument name="css_class" xsi:type="string">header links</argument>
+							</arguments>
+							<block class="Magento\Customer\Block\Account\Customer" name="customer" template="account/customer.phtml" before="-"/>
+							<!-- <block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link-login" template="account/link/authorization.phtml"/>  -->
+						</block>
+					</container>
+				</container>
+			</container>
+             <container name="header.panel.wrapper2" htmlClass="middle-block" htmlTag="div" after="header.top.wrapper">
+				<referenceBlock class="Magento\Theme\Block\Html\Header" name="header" as="header" template="Magento_Theme::html/welcome.phtml" remove="true" />
+				<!-- <container name="header.panel.inner" htmlClass="middle-block-inner clearfix" htmlId="particles-js" htmlTag="div" before="-"> -->
+				<container name="header.panel.inner" htmlClass="middle-block-inner clearfix" htmlTag="div" before="-">
+					<container name="header.middle.left" htmlClass="left-block clearfix" htmlTag="div">
+						<container name="header.menu.inner" htmlClass="menu-inner clearfix" htmlTag="div" after="header.panel">
+							<container name="menu.block" htmlClass="toggle-nav clearfix" htmlTag="div" before="-" >
+							</container>
+						</container>
+					</container>
+					<container name="header.middle.right" htmlClass="right-block" htmlTag="div" />
+				</container>
+			</container>
+          <block class="Meigee\Bowtie\Block\Frontend\BgSlider" name="bgslider" template="Meigee_Bowtie::bgslider.phtml" />
+        </referenceContainer>
+
+         <referenceContainer name="header-wrapper">
+           <block class="Meigee\Bowtie\Block\Frontend\CustomLogo" name="logo" as="logo" template="Magento_Theme::html/header/logo.phtml">
+                <arguments>
+                    <argument name="logo_file" xsi:type="string">images/logo.png</argument>
+                    <argument name="logo_img_width" xsi:type="number">275</argument>
+                    <argument name="logo_img_height" xsi:type="number">64</argument>
+                </arguments>
+            </block>
+			 <referenceBlock name="top.links">
+				<!--  <block class="Magento\Customer\Block\Account\Link" name="top-link-myaccount">
+					<arguments>
+						 <argument name="label" xsi:type="string">My Account</argument>
+						<argument name="class" xsi:type="string">top-link-myaccount</argument>
+					</arguments>
+				</block>  -->
+				<block class="Magento\Customer\Block\Account\Link" name="my-account-link">
+					<arguments>
+						<argument name="label" xsi:type="string" translate="true">My Account</argument>
+						<argument name="class" xsi:type="string">top-link-myaccount</argument>
+					</arguments>
+				</block>
+				<block class="Magento\Customer\Block\Account\RegisterLink" name="register-link">
+					<arguments>
+						<argument name="label" xsi:type="string" translate="true">Create an Account</argument>
+						<argument name="class" xsi:type="string">top-link-create</argument>
+					</arguments>
+				</block>
+			</referenceBlock>
+        </referenceContainer>
+
+		 <referenceContainer name="page.top">
+			<referenceBlock name="navigation.sections" remove="true" />
+        </referenceContainer>
+
+		<referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" as="subheader" template="Magento_Theme::html/subheader.phtml" />
+		</referenceBlock>
+
+        <move element="header.panel" destination="header.middle.left" before="-" />
+		<move element="top.links" destination="customer"/>
+		<move element="register-link" destination="header.links"/>
+		<move element="header-wrapper" destination="header.panel" after="-" />
+        <move element="catalog.topnav" destination="menu.block" after="-"/>
+        <move element="minicart" destination="header.middle.right" after="-"/>
+        <move element="top.search" destination="header.middle.right" after="-"/>
+        <move element="store_language" destination="header.top.right" before="currency"/>
+		<move element="currency" destination="header.top.right" before="header.links"/>
+
+		<container name="sticky.header" htmlClass="header" htmlId="sticky-header" htmlTag="div" meigee-config-bool="bowtie_general/bowtie_header/sticky_header">
+			<container name="sticky.header.inner" htmlClass="container" htmlTag="div">
+				<container name="sticky.header.left" htmlClass="left-wrapper" htmlTag="div" meigee-config-bool="bowtie_general/bowtie_header/sticky_header_logo">
+					<block class="Meigee\Bowtie\Block\Frontend\CustomLogo" name="sticky.logo" as="sticky.logo" template="Magento_Theme::html/header/small_logo.phtml" meigee-config-ibool="bowtie_general/bowtie_header/small_logo_status">
+						<arguments>
+							<argument name="logo_img_width" xsi:type="number">137</argument>
+							<argument name="logo_img_height" xsi:type="number">32</argument>
+							<argument name="logo_file" xsi:type="string">images/small_logo.png</argument>
+						</arguments>
+					</block>
+					<block class="Meigee\Bowtie\Block\Frontend\CustomLogo" name="sticky.logo" as="sticky.logo" template="Magento_Theme::html/header/small_logo.phtml" meigee-config-bool="bowtie_general/bowtie_header/small_logo_status">
+						<arguments>
+							<argument name="logo_img_width" xsi:type="number">137</argument>
+							<argument name="logo_img_height" xsi:type="number">32</argument>
+							<argument name="logo_file" xsi:type="string">images/small_logo.png</argument>
+						</arguments>
+					</block>
+				</container>
+				<container name="sticky.header.right" htmlClass="right-wrapper clearfix" htmlTag="div">
+					<block class="Magento\Theme\Block\Html\Topmenu" name="sticky.catalog.topnav" template="html/topmenu_sticky.phtml" ttl="3600" after="sticky.logo" meigee-config-bool="bowtie_general/bowtie_header/sticky_header_nav" />
+					<block class="Magento\Framework\View\Element\Template" name="sticky.top.search" as="topSearch" after="sticky.minicart" template="Magento_Search::form.mini.phtml" meigee-config-bool="bowtie_general/bowtie_header/sticky_header_search" />
+					<!-- <block class="Magento\Checkout\Block\Cart\Sidebar" name="sticky.minicart" as="sticky.minicart" after="sticky.catalog.topnav" template="cart/minicart2.phtml" meigee-config-bool="bowtie_general/bowtie_header/sticky_header_cart">
+						<arguments>
+							<argument name="jsLayout" xsi:type="array">
+								<item name="types" xsi:type="array"/>
+								<item name="components" xsi:type="array">
+									<item name="minicart_content2" xsi:type="array">
+										<item name="component" xsi:type="string">Magento_Checkout/js/view/minicart</item>
+										<item name="config" xsi:type="array">
+											<item name="template" xsi:type="string">Magento_Checkout/minicart/content2</item>
+										</item>
+										<item name="children" xsi:type="array">
+											<item name="subtotal.container" xsi:type="array">
+												<item name="component" xsi:type="string">uiComponent</item>
+												<item name="config" xsi:type="array">
+													<item name="displayArea" xsi:type="string">subtotalContainer</item>
+												</item>
+												<item name="children" xsi:type="array">
+													<item name="subtotal" xsi:type="array">
+														<item name="component" xsi:type="string">uiComponent</item>
+														<item name="config" xsi:type="array">
+															<item name="template" xsi:type="string">Magento_Checkout/minicart/subtotal</item>
+														</item>
+													</item>
+												</item>
+											</item>
+											<item name="extra_info" xsi:type="array">
+												<item name="component" xsi:type="string">uiComponent</item>
+												<item name="config" xsi:type="array">
+													<item name="displayArea" xsi:type="string">extraInfo</item>
+												</item>
+											</item>
+											<item name="promotion" xsi:type="array">
+												<item name="component" xsi:type="string">uiComponent</item>
+												<item name="config" xsi:type="array">
+													<item name="displayArea" xsi:type="string">promotion</item>
+												</item>
+											</item>
+										</item>
+									</item>
+								</item>
+							</argument>
+						</arguments>
+					</block> -->
+				</container>
+			</container>
+		</container>
+		<move element="sticky.header" destination="header.container.wrapper" after="-" />
+
+
+		<referenceBlock name="register-link" remove="true" meigee-config-bool="bowtie_general/bowtie_toplinks/toplinks_register" />
+		<referenceBlock name="authorization-link" remove="true" meigee-config-bool="bowtie_general/bowtie_toplinks/toplinks_login" />
+		<!-- <referenceBlock name="authorization-link-login" remove="true" meigee-config-bool="bowtie_general/bowtie_toplinks/toplinks_login" /> -->
+		<referenceBlock name="wish-list-link" remove="true" meigee-config-bool="bowtie_general/bowtie_toplinks/toplinks_wishlist" />
+		<referenceBlock name="my-account-link" meigee-config-bool="bowtie_general/bowtie_toplinks/toplinks_account" remove="true" />
+		<referenceBlock name="catalog.compare.link" remove="true" meigee-config-bool="bowtie_general/bowtie_toplinks/toplinks_compare" />
+
+
+
+
+        <referenceContainer name="footer-container" meigee-config-ibool="bowtie_general/bowtie_footer/custom_footer">
+            <container name="footer" as="footer" label="Page Footer" htmlTag="div" htmlClass="footer content default">
+				<container name="footer.inner" label="Footer Inner" htmlTag="div" htmlClass="container">
+					<block class="Magento\Theme\Block\Html\Footer" name="copyright" template="html/copyright.phtml"/>
+					<block class="Magento\Framework\View\Element\Html\Links" name="footer_links">
+						<arguments>
+							<argument name="css_class" xsi:type="string">footer links</argument>
+						</arguments>
+					</block>
+					<block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" template="switch/stores.phtml"/>
+					<!-- <block class="Magento\Framework\View\Element\Template" name="report.bugs" template="Magento_Theme::html/bugreport.phtml" /> -->
+				</container>
+            </container>
+        </referenceContainer>
+
+		<referenceContainer name="footer-container" meigee-config-bool="bowtie_general/bowtie_footer/custom_footer">
+            <container name="footer" as="footer" label="Page Footer" htmlTag="div" htmlClass="footer">
+				<block class="Magento\Cms\Block\Block" name="bowtie.footer" meigee-config-add-argument="block_id|bowtie_general/bowtie_footer/custom_footer_block">
+					<arguments>
+						<argument name="block_id" xsi:type="string">bowtie_footer</argument>
+					</arguments>
+				</block>
+                <!-- <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" template="switch/stores.phtml"/>
+                <block class="Magento\Framework\View\Element\Html\Links" name="footer_links">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">footer links</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Theme\Block\Html\Footer" name="copyright" template="html/copyright.phtml"/>
+                <block class="Magento\Framework\View\Element\Template" name="report.bugs" template="Magento_Theme::html/bugreport.phtml" /> -->
+            </container>
+        </referenceContainer>
+        <container name="login-popup">
+			<block class="Magento\Customer\Block\Form\Login" name="custom_customer_form_login" template="Magento_Theme::form/login.phtml" />
+		</container>
+    </body>
+</page>

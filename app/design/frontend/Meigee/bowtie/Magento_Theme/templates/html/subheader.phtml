@@ -1,0 +1,12 @@
+<?php
+	$meigee_helper = $this->helper('\Meigee\Bowtie\Helper\BowtieGeneral');
+	$contentWidth = $meigee_helper->getCustomThemeOptionCnf('bowtie_layout', 'container_width');
+	$sticky_opacity = $meigee_helper->getCustomThemeOptionCnf('bowtie_header', 'sticky_header_opacity');
+?>
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<style type="text/css">
+	body.boxed-layout .container,
+	body .container {max-width: <?php echo $contentWidth; ?>px; width: 100%;}
+	#sticky-header {opacity: <?php echo $sticky_opacity/100; ?>;}
+</style>

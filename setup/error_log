@@ -1,0 +1,4 @@
+[03-Dec-2016 17:26:35] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home1/stereoty/public_html/techaffair/setup/index.php on line 14
+[03-Dec-2016 17:26:35] PHP Parse error:  syntax error, unexpected T_STRING in /home1/stereoty/public_html/techaffair/setup/index.php on line 28
+[03-Dec-2016 17:26:37] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home1/stereoty/public_html/techaffair/setup/index.php on line 14
+[03-Dec-2016 17:26:37] PHP Parse error:  syntax error, unexpected T_STRING in /home1/stereoty/public_html/techaffair/setup/index.php on line 28

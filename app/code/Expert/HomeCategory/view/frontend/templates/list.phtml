@@ -1,0 +1,33 @@
+<?php $categories = $this->_getCategoryCollection(); ?>
+
+<?php if($categories->count()):  ?>
+<div class="row home-cat-list">
+	<?php foreach($categories as $category): ?>
+		<div class="col-md-6 custom_content">
+			<?php if($imgUrl = $category->getImageUrl()): ?>
+				<a href="<?php echo $category->getUrl() ?>"> <img src="<?php echo $imgUrl ?>"> </a>
+			<?php endif;  ?>
+			<div class="custom_content_div">
+				<a href="<?php echo $category->getUrl() ?>">
+				<span class="content">
+					<strong><?php echo $category->getName() ?></strong>
+					<br>
+					<span class="category_content"><?php echo $category->getSubtitle(); ?></span>
+				</span>
+				<br>
+				<span class="content_1"><?php echo $category->getSubtitle(); ?></span>
+			</a>
+
+			<?php #echo $category->getSaleTimer() ?>
+			<?php $sd =  abs(floor((time() - strtotime($category->getSaleTimer())) / (60 * 60 * 24))); ?>
+			<span class="sub_content1">
+				<span class="sub_content2">DAYS LEFT</span>
+				<span class="sub_content"><?php echo __("%1",$sd) ?>
+				</span>
+			</span>
+			</div>
+
+		</div>
+	<?php endforeach; ?>
+</div>
+<?php endif;  ?>

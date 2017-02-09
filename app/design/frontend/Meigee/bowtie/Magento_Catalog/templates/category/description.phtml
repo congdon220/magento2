@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php $sd =  abs(floor((time() - strtotime($block->getCurrentCategory()->getSaleTimer())) / (60 * 60 * 24))); ?>
+<?php if ($_description = $block->getCurrentCategory()->getDescription()): ?>
+    <div class="category-description">
+   		<?php if ($_imgUrl = $block->getCurrentCategory()->getImage()) :
+   					$_imgUrl = $this->getBaseUrl()."pub/media/catalog/category/".$_imgUrl; ?>
+   					<img src="<?php echo $_imgUrl; ?>">
+			<?php else: ?>
+					<img src="<?php echo $this->getBaseUrl().'pub/media/wysiwyg/no_image.png'; ?>">
+			<?php endif; ?>
+    </div>
+     <div class="category-title">
+     <div class="category-title-timer">
+			<h3><?php echo $block->getCurrentCategory()->getName()?> </h3>
+			<br>
+			<div class="category-timer"><i class="fa fa-clock-o " aria-hidden="true"></i> <span class="category-timer-content"><span> Sale ends in </span><?php echo __("%1 days",$sd) ?></span>
+			</div>
+	</div>
+		
+		<p><?php /* @escapeNotVerified */ echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_description, 'description') ?></p>
+	</div>
+			<?php endif; ?>

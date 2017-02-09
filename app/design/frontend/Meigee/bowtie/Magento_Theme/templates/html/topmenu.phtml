@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see \Magento\Theme\Block\Html\Topmenu
+ */
+?>
+<?php $om = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $om->get('Magento\Customer\Model\Session'); ?>
+<?php $columnsLimit = $block->getColumnsLimit() ?: 0; ?>
+<?php $_menu = $block->getHtml('level-top', 'submenu', $columnsLimit) ?>
+
+<nav id="no-mobile-menu" class="navbar navbar-default navigation">
+	<span data-action="toggle-nav" class="action nav-toggle">
+    <i class="ion-navicon"></i>
+    <span><?php /* @escapeNotVerified */ echo __('Menu') ?></span>
+  </span>
+	<div class="collapse topmenu navbar-collapse">
+		<ul class="nav topmenu navbar-nav" id="nav" data-mage-init='{"menu":{"responsive":true, "expanded":true, "delay": 0, "position":{"my":"left top","at":"left bottom"}}}'>
+			<?php /* @escapeNotVerified */ echo $_menu ?>
+			<?php /* @escapeNotVerified */ echo $block->getChildHtml(); ?>
+			<li class="level0 nav-6 last level-top ui-menu-item" role="presentation"><a href="<?php echo $block->getBaseUrl() ?>browse" class="level-top ui-corner-all"  tabindex="-1" role="menuitem"><span>Browse</span></a></li>
+			 <?php if($customerSession->isLoggedIn()): ?>
+			<li class="level0 hide_wrapper">
+				<a href="<?php echo $block->getBaseUrl() ?>customer/account/" class="level-top ui-corner-all">My Account</a>
+			</li>
+			<li class="level0 hide_wrapper">
+			    <a href="<?php echo $block->getBaseUrl() ?>customer/account/logout/" class="level-top ui-corner-all">Sign Out</a>
+			</li>
+		<?php endif; ?>
+		</ul>
+
+	</div>
+</nav>
+
+<!-- <div class="appleMenu">
+  <div class="burger-container">
+    <div id="burger">
+      <div class="bar topBar"></div>
+      <div class="bar btmBar"></div>
+    </div>
+  </div>
+  <ul class="menu">
+    <?php /* @escapeNotVerified */ echo $_menu ?>
+    <?php /* @escapeNotVerified */ echo $block->getChildHtml(); ?>
+    <li><a href="<?php echo $block->getBaseUrl() ?>browse">Browse</a></li>
+    <?php if($customerSession->isLoggedIn()): ?>
+    <li><a href="<?php echo $block->getBaseUrl() ?>customer/account/">My Account</a></li>
+    <li><a href="<?php echo $block->getBaseUrl() ?>customer/account/logout/">Sign Out</a></li>
+  <?php endif; ?>
+  </ul>
+</div>
+ -->
